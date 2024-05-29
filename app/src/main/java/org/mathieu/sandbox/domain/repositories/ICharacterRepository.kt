@@ -1,6 +1,7 @@
 package org.mathieu.sandbox.domain.repositories
 
 import org.mathieu.sandbox.domain.models.Character
+import org.mathieu.sandbox.domain.models.Episode
 
 interface ICharacterRepository {
     /**
@@ -12,5 +13,7 @@ interface ICharacterRepository {
     fun getCharacterByIdOrNull(id: Int): Character?
 
     fun getCharacters(): List<Character>
+
+    fun getEpisodeByIdOrNull(id: Int): Episode?
 
 }

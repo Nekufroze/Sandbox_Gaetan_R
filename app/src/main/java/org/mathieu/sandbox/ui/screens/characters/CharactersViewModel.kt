@@ -31,14 +31,14 @@ class CharactersViewModel(application: Application) : AndroidViewModel(applicati
         get() = _state
 
 
-    private val _events = Channel<CharactersEvent>(kotlinx.coroutines.channels.Channel.BUFFERED)
+    private val _events = Channel<CharactersEvent>(Channel.BUFFERED)
     val events: Flow<CharactersEvent>
         get() = _events.receiveAsFlow()
 
 
-
     init {
-
+        // Initialization of the ViewModel. This method is called once during the creation of the ViewModel.
+        // Here, we retrieve the characters and update the state.
         val characters = CharacterRepositoryImpl.getCharacters()
 
         _state.update { prevState ->
@@ -52,6 +52,9 @@ class CharactersViewModel(application: Application) : AndroidViewModel(applicati
 
 
     fun navigateToDetail(id: Int) {
+        // This method is called when the user wants to navigate to the details of a character.
+        // We use viewModelScope to launch a coroutine that sends a navigation event.
+
         viewModelScope.launch {
             _events.send(CharactersEvent.NavigateToDetails(id = id))
         }
